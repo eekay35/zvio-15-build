@@ -1,0 +1,110 @@
+#+
+# Copyright (c) 2010-2015 iXsystems, Inc., All rights reserved.
+# Updates (c) 2024-2024 zVault.io
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED.  IN NO EVENT SHALL iXsystems, Inc. OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+# OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.
+#
+
+repos += {
+    "name": "zvio-os",
+    "path": "zvio-os",
+    "url": "http://127.0.0.1:3000/zvaultio/zvio-os",
+    "branch": "zvio-13.3"
+}
+
+repos += {
+<<<<<<< HEAD
+    "name": "freenas",
+    "path": "freenas",
+    "url": "http://github.com/freenas/freenas.git",
+    "branch": "truenas/13.3-stable"
+=======
+    "name": "zvio-middleware",
+    "path": "zvio-middleware",
+    "url": "http://127.0.0.1:3000/zvaultio/zvio-middleware",
+    "branch": "zvio-13.3"
+>>>>>>> zvio-15.0
+}
+
+
+repos += {
+<<<<<<< HEAD
+    "name": "webui",
+    "path": "webui",
+    "url": "http://github.com/freenas/webui.git",
+    "branch": "truenas/13.3-stable"
+}
+
+repos += {
+    "name": "ports",
+    "path": "ports",
+    "url": "https://github.com/freenas/ports.git",
+    "branch": "truenas/13.3-stable"
+=======
+    "name": "zvio-webui",
+    "path": "zvio-webui",
+    "url": "http://127.0.0.1:3000/zvaultio/zvio-webui",
+    "branch": "zvio-13.3"
+}
+
+repos += {
+    "name": "zvio-ports",
+    "path": "zvio-ports",
+    "url": "http://127.0.0.1:3000/zvaultio/zvio-ports.git",
+    "branch": "zvio-13.3"
+>>>>>>> zvio-15.0
+}
+
+repos += {
+    "name" :"zvio-licenselib",
+    "path": "zvio-licenselib",
+    "url": "http://127.0.0.1:3000/zvaultio/zvio-licenselib.git",
+    "branch": "zvio-13.3"
+}
+
+repos += {
+    "name": "zvio-pkgtools",
+    "path": "zvio-pkgtools",
+    "url": "http://127.0.0.1:3000/zvaultio/zvio-pkgtools.git",
+    "branch": "zvio-13.3"
+}
+
+repos += {
+    "name": "zvio-py-bsd",
+    "path": "zvio-py-bsd",
+    "url": "http://127.0.0.1:3000/zvaultio/zvio-py-bsd.git",
+    "branch": "zvio-13.3"
+}
+
+repos += {
+<<<<<<< HEAD
+    "name": "iocage",
+    "path": "iocage",
+    "url": "https://github.com/freenas/iocage.git",
+    "branch": "truenas/13.0-stable"
+=======
+    "name": "zvio-iocage",
+    "path": "zvio-iocage",
+    "url": "http://127.0.0.1:3000/zvaultio/zvio-iocage.git",
+    "branch": "zvio-13.3"
+>>>>>>> zvio-15.0
+}
