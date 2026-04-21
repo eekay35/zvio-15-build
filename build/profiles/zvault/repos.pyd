@@ -27,63 +27,63 @@
 repos += {
     "name": "zvio-os",
     "path": "zvio-os",
-    "url": "https://git.freebsd.org/src.git",
-    "branch": "releng/15.0"
+    "url": "https://github.com/eekay35/zvio-15-os.git",
+    "branch": "main"
 }
 
 repos += {
     "name": "zvio-middleware",
     "path": "zvio-middleware",
-    "url": "https://github.com/zvaultio/zvio-middleware.git",
-    "branch": "zvio-13.3"
+    "url": "https://github.com/eekay35/zvio-15-middleware.git",
+    "branch": "main"
 }
 
 
 repos += {
     "name": "zvio-webui",
     "path": "zvio-webui",
-    "url": "https://github.com/zvaultio/zvio-webui.git",
-    "branch": "zvio-13.3"
+    "url": "https://github.com/eekay35/zvio-15-webui.git",
+    "branch": "main"
 }
 
 repos += {
     "name": "zvio-ports",
     "path": "zvio-ports",
-    "url": "https://git.freebsd.org/ports.git",
+    "url": "https://github.com/eekay35/zvio-15-ports.git",
     "branch": "main"
 }
 
 repos += {
     "name" :"zvio-py-licenselib",
     "path": "zvio-py-licenselib",
-    "url": "https://github.com/zvaultio/zvio-py-licenselib.git",
-    "branch": "zvio-13.3"
+    "url": "https://github.com/eekay35/zvio-15-py-licenselib.git",
+    "branch": "main"
 }
 
 repos += {
     "name": "zvio-pkgtools",
     "path": "zvio-pkgtools",
-    "url": "https://github.com/zvaultio/zvio-pkgtools.git",
-    "branch": "zvio-13.3"
+    "url": "https://github.com/eekay35/zvio-15-pkgtools.git",
+    "branch": "main"
 }
 
 repos += {
     "name": "zvio-py-bsd",
     "path": "zvio-py-bsd",
-    "url": "https://github.com/zvaultio/zvio-py-bsd.git",
-    "branch": "zvio-13.3"
+    "url": "https://github.com/eekay35/zvio-15-py-bsd.git",
+    "branch": "main"
 }
 
 repos += {
     "name": "zvio-iocage",
     "path": "zvio-iocage",
-    "url": "https://github.com/zvaultio/zvio-iocage.git",
-    "branch": "zvio-13.3"
+    "url": "https://github.com/eekay35/zvio-15-iocage.git",
+    "branch": "main"
 }
 
 repos += {
     "name": "zvio-py-fenced",
     "path": "zvio-py-fenced",
-    "url": "https://github.com/zvaultio/zvio-py-fenced.git",
-    "branch": "zvio-13.3"
+    "url": "https://github.com/eekay35/zvio-15-py-fenced.git",
+    "branch": "main"
 }
