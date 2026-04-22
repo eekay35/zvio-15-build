@@ -26,18 +26,20 @@ makeoptions	WITH_CTF=1		# Run ctfconvert(1) for DTrace support
 options 	SCHED_ULE		# ULE scheduler
 options 	NUMA			# Non-Uniform Memory Architecture support
 options 	PREEMPTION		# Enable kernel thread preemption
+options 	EXTERR_STRINGS
 options 	VIMAGE			# Subsystem virtualization, e.g. VNET
 options 	INET			# InterNETworking
 options 	INET6			# IPv6 communications protocols
 options 	IPSEC_SUPPORT		# Allow kldload of ipsec and tcpmd5
-options		NETLINK			# netlink(4) support
-options		ROUTE_MPATH		# Multipath routing support
+options 	IPSEC_OFFLOAD		# Inline ipsec offload infra
+options 	ROUTE_MPATH		# Multipath routing support
+options 	FIB_ALGO		# Modular fib lookups
 options 	TCP_OFFLOAD		# TCP offload
 options 	TCP_BLACKBOX		# Enhanced TCP event logging
 options 	TCP_HHOOK		# hhook(9) framework for TCP
-options		TCP_RFC7413		# TCP Fast Open
+options 	TCP_RFC7413		# TCP Fast Open
 options 	SCTP_SUPPORT		# Allow kldload of SCTP
-options		KERN_TLS		# TLS transmit & receive offload
+options 	KERN_TLS		# TLS transmit & receive offload
 options 	FFS			# Berkeley Fast Filesystem
 options 	SOFTUPDATES		# Enable FFS soft updates support
 options 	UFS_ACL			# Support for access control lists
@@ -66,13 +68,14 @@ options 	COMPAT_FREEBSD9		# Compatible with FreeBSD9
 options 	COMPAT_FREEBSD10	# Compatible with FreeBSD10
 options 	COMPAT_FREEBSD11	# Compatible with FreeBSD11
 options 	COMPAT_FREEBSD12	# Compatible with FreeBSD12
+options 	COMPAT_FREEBSD13	# Compatible with FreeBSD13
+options 	COMPAT_FREEBSD14	# Compatible with FreeBSD14
 options 	SCSI_DELAY=5000		# Delay (in ms) before probing SCSI
 options 	KTRACE			# ktrace(1) support
 options 	STACK			# stack(9) support
 options 	SYSVSHM			# SYSV-style shared memory
 options 	SYSVMSG			# SYSV-style message queues
 options 	SYSVSEM			# SYSV-style semaphores
-options 	P1003_1B_SEMAPHORES	# POSIX-style semaphores
 options 	_KPOSIX_PRIORITY_SCHEDULING # POSIX P1003_1B real-time extensions
 options 	PRINTF_BUFR_SIZE=128	# Prevent printf output being interspersed.
 options 	KBD_INSTALL_CDEV	# install a CDEV entry in /dev
@@ -84,23 +87,14 @@ options 	MAC			# TrustedBSD MAC Framework
 options 	KDTRACE_FRAME		# Ensure frames are compiled in
 options 	KDTRACE_HOOKS		# Kernel DTrace hooks
 options 	DDB_CTF			# Kernel ELF linker loads CTF data
-options 	DDB			# Support DDB.
 options 	INCLUDE_CONFIG_FILE	# Include this file in kernel
 options 	RACCT			# Resource accounting framework
 options 	RACCT_DEFAULT_TO_DISABLED # Set kern.racct.enable=0 by default
 options 	RCTL			# Resource limits
-options 	KGSSAPI
 
 # Debugging support.  Always need this:
 options 	KDB			# Enable kernel debugger support.
 options 	KDB_TRACE		# Print a stack trace for a panic.
-
-# Kernel Sanitizers
-#options 	COVERAGE		# Generic kernel coverage. Used by KCOV
-#options 	KCOV			# Kernel Coverage Sanitizer
-# Warning: KUBSAN can result in a kernel too large for loader to load
-#options 	KUBSAN			# Kernel Undefined Behavior Sanitizer
-#options 	KCSAN			# Kernel Concurrency Sanitizer
 
 # Kernel dump features.
 options 	EKCD			# Support for encrypted kernel dumps
@@ -112,17 +106,17 @@ options 	NETGDB			# netgdb(4) client support
 
 # Make an SMP-capable kernel by default
 options 	SMP			# Symmetric MultiProcessor Kernel
-options 	EARLY_AP_STARTUP
 
 # CPU frequency control
 device		cpufreq
 
 # Bus support.
 device		acpi
+device		smbios
 options 	IOMMU
 device		pci
 options 	PCI_HP			# PCI-Express native HotPlug
-options		PCI_IOV			# PCI SR-IOV support
+options 	PCI_IOV			# PCI SR-IOV support
 
 options 	COMPAT_LINUXKPI
 
@@ -144,13 +138,13 @@ device		siis			# SiliconImage SiI3124/SiI3132/SiI3531 SATA
 # SCSI Controllers
 device		ahc			# AHA2940 and onboard AIC7xxx devices
 device		ahd			# AHA39320/29320 and onboard AIC79xx devices
-#device		esp			# AMD Am53C974 (Tekram DC-390(T))
 device		hptiop			# Highpoint RocketRaid 3xxx series
 device		isp			# Qlogic family
 #device		ispfw			# Firmware for QLogic HBAs- normally a module
 device		mpt			# LSI-Logic MPT-Fusion
 device		mps			# LSI-Logic MPT-Fusion 2
 device		mpr			# LSI-Logic MPT-Fusion 3
+device		mpi3mr			# LSI-Logic MPT-Fusion 4
 device		sym			# NCR/Symbios Logic
 device		isci			# Intel C600 SAS controller
 device		ocs_fc			# Emulex FC adapters
@@ -167,13 +161,9 @@ device		ses			# Enclosure Services (SES and SAF-TE)
 #device		ctl			# CAM Target Layer
 
 # RAID controllers interfaced to the SCSI subsystem
-#device		amr			# AMI MegaRAID
 device		arcmsr			# Areca SATA II RAID
 device		ciss			# Compaq Smart RAID 5*
-#device		iir			# Intel Integrated RAID
 device		ips			# IBM (Adaptec) ServeRAID
-#device		mly			# Mylex AcceleRAID/eXtremeRAID
-#device		twa			# 3ware 9000 series PATA/SATA RAID
 device		smartpqi		# Microsemi smartpqi driver
 device		tws			# LSI 3ware 9750 SATA+SAS 6Gb/s RAID controller
 
@@ -181,19 +171,19 @@ device		tws			# LSI 3ware 9750 SATA+SAS 6Gb/s RAID controller
 device		aac			# Adaptec FSA RAID
 device		aacp			# SCSI passthrough for aac (requires CAM)
 device		aacraid			# Adaptec by PMC RAID
-#device		ida			# Compaq Smart RAID
+device		ida			# Compaq Smart RAID
 device		mfi			# LSI MegaRAID SAS
-device		mfip			# LSI MegaRAID SAS passthrough, requires CAM
 #device		mlx			# Mylex DAC960 family
 device		mrsas			# LSI/Avago MegaRAID SAS/SATA, 6Gb/s and 12Gb/s
-device		pmspcv			# PMC-Sierra SAS/SATA Controller driver
 #XXX pointer/int warnings
 #device		pst			# Promise Supertrak SX6000
-#device		twe			# 3ware ATA RAID
 
 # NVM Express (NVMe) support
 device		nvme			# base NVMe driver
 device		nvd			# expose NVMe namespaces as disks, depends on nvme
+
+# Universal Flash Storage Host Controller Interface support
+device 		ufshci			# UFS host controller
 
 # Intel Volume Management Device (VMD) support
 device		vmd
@@ -205,12 +195,9 @@ device		psm			# PS/2 mouse
 
 device		kbdmux			# keyboard multiplexer
 
-#device		vga			# VGA video card driver
-#options 	VESA			# Add support for VESA BIOS Extensions (VBE)
-
-#device		splash			# Splash screen and screen saver support
-
 # syscons is the legacy console driver, resembling an SCO console
+#device		vga			# VGA video card driver
+#device		splash			# Splash screen and screen saver support
 #device		sc
 #options 	SC_PIXEL_MODE		# add support for the raster text mode
 
@@ -222,10 +209,8 @@ device		vt_vbefb
 
 device		agp			# support several AGP chipsets
 
-# PCCARD (PCMCIA) support
-# PCMCIA and cardbus bridge support
-#device		cbb			# cardbus (yenta) bridge
-#device		pccard			# PC Card (16-bit) bus
+# CardBus bridge support
+#device		cbb			# CardBus (yenta) bridge
 #device		cardbus			# CardBus (32-bit) bus
 
 # Serial (COM) ports
@@ -250,25 +235,16 @@ device		ixl			# Intel 700 Series Physical Function
 device		iavf			# Intel Adaptive Virtual Function
 device		ice			# Intel 800 Series Physical Function
 device		vmx			# VMware VMXNET3 Ethernet
-device		axp			# AMD EPYC integrated NIC
+device		axp			# AMD EPYC integrated NIC (requires miibus)
 
 # PCI Ethernet NICs.
 device		bxe			# Broadcom NetXtreme II BCM5771X/BCM578XX 10GbE
-device		cxgb			# Chelsio T3 10 Gigabit Ethernet adapter driver
-device		cxgbe			# Chelsio T4 and T5 based 1GbE/10GbE/40GbE PCIe Ethernet adapters.
 device		le			# AMD Am7900 LANCE and Am79C9xx PCnet
-device		mlx4			# Mellanox ConnectX HCA common code
-device		mlx4en			# Mellanox ConnectX HCA Ethernet
-device		mxge			# Myricom Myri-10G 10GbE NIC
 device		ti			# Alteon Networks Tigon I/II gigabit Ethernet
-device		qlxgb			# QLogic 10Gb 3200/8200 Ethernet
-device		qlxge			# QLogic 10Gb 8100 Ethernet
-#device		qlxgbe			# QLogic 10Gb 8300 Ethernet
-device		oce			# Emulex 10Gbe Ethernet
-device		sfxge			# Solarflare SFC9000 family 10Gb Ethernet adapters
 
 # Nvidia/Mellanox Connect-X 4 and later, Ethernet only
-# mlx5ib requires ibcore infra and is not included by default
+#  o requires COMPAT_LINUXKPI and xz(4)
+#  o mlx5ib requires ibcore infra and is not included by default
 device		mlx5			# Base driver
 device		mlxfw			# Firmware update
 device		mlx5en			# Ethernet driver
@@ -309,15 +285,13 @@ device		vge			# VIA VT612x gigabit Ethernet
 #options 	IEEE80211_DEBUG		# enable debug msgs
 #options 	IEEE80211_SUPPORT_MESH	# enable 802.11s draft support
 #device		wlan_wep		# 802.11 WEP support
-#device		wlan_ccmp		# 802.11 CCMP support
 #device		wlan_tkip		# 802.11 TKIP support
+#device		wlan_ccmp		# 802.11 CCMP support
+#device		wlan_gcmp		# 802.11 GCMP support
 #device		wlan_amrr		# AMRR transmit rate control algorithm
-#device		an			# Aironet 4500/4800 802.11 wireless NICs.
-#device		ath			# Atheros NICs
-#device		ath_pci			# Atheros pci/cardbus glue
-#device		ath_hal			# pci/cardbus chip support
+#device		ath			# Atheros CardBus/PCI NICs
+#device		ath_hal			# Atheros CardBus/PCI chip support
 #options 	AH_AR5416_INTERRUPT_MITIGATION # AR5416 interrupt mitigation
-#options 	ATH_ENABLE_11N		# Enable 802.11n support for AR5416 and later
 #device		ath_rate_sample		# SampleRate tx rate control for ath
 #device		bwi			# Broadcom BCM430x/BCM431x wireless NICs.
 #device		bwn			# Broadcom BCM43xx wireless NICs.
@@ -355,7 +329,9 @@ device		ohci			# OHCI PCI->USB interface
 device		ehci			# EHCI PCI->USB interface (USB 2.0)
 device		xhci			# XHCI PCI->USB interface (USB 3.0)
 device		usb			# USB Bus (required)
-device		ukbd			# Keyboard
+device		usbhid			# USB HID Transport
+device		hkbd			# HID Keyboard
+device		ukbd			# USB Keyboard
 device		umass			# Disks/Mass storage - Requires scbus and da
 
 # Sound support
@@ -372,7 +348,6 @@ device		umass			# Disks/Mass storage - Requires scbus and da
 device		mmc			# MMC/SD bus
 device		mmcsd			# MMC/SD memory card
 device		sdhci			# Generic PCI SD Host Controller
-device		rtsx			# Realtek SD card reader
 
 # VirtIO support
 device		virtio			# Generic VirtIO bus (required)
@@ -386,11 +361,13 @@ device		virtio_balloon		# VirtIO Memory Balloon device
 device		kvm_clock		# KVM paravirtual clock driver
 
 # HyperV drivers and enhancement support
-device		hyperv			# HyperV drivers 
+device		hyperv			# HyperV drivers
 
 # Xen HVM Guest Optimizations
-# NOTE: XENHVM depends on xenpci.  They must be added or removed together.
+# NOTE: XENHVM depends on xenpci and xentimer.
+# They must be added or removed together.
 options 	XENHVM			# Xen HVM kernel infrastructure
+device		xenefi			# Xen EFI timer device
 device		xenpci			# Xen HVM Hypervisor services driver
 device		xentimer		# Xen x86 PV timer device
 
@@ -405,7 +382,12 @@ device		uinput			# install /dev/uinput cdev
 # HID support
 options 	HID_DEBUG		# enable debug msgs
 device		hid			# Generic HID support
+device		hidbus			# Generic HID Bus
 options 	IICHID_SAMPLING		# Workaround missing GPIO INTR support
+
+# EFI devices
+device		efidev			# EFI pseudo-device
+device		efirtc			# EFI RTC
 
 ## Networking for jails and VMs
 options		IPDIVERT
@@ -418,7 +400,7 @@ options		LIBALIAS
 device		epair			# A pair of virtual back-to-back connected Ethernet interfaces
 device		if_bridge		# Ethernet bridge device
 
-## FreeNAS shared modifications
+## zVaultIO shared modifications
 options		GEOM_UZIP		# Read-only compressed disks
 options		GEOM_ELI		# Disk encryption.
 options		GEOM_MIRROR		# Disk mirroring.
@@ -443,7 +425,7 @@ device		wmt
 #options		SDP		# SDP protocol
 options		IPOIB_CM	# IPoIB connected mode
 
-## FreeNAS specific modifications
+## zVaultIO specific modifications
 # misc
 device		padlock		# Crypto in VIA C3, C7 and Eden processors
 device		snp		# Snoop device - to look at pty/vty/etc..
@@ -455,9 +437,9 @@ device		ichwd		# Intel ICH watchdog timer
 device		amdsbwd		# AMD SB7xx watchdog timer
 device		viawd		# VIA south bridge watchdog timer
 device		wbwd		# Winbond watchdog timer
-## End FreeNAS specific section
+## End zVaultIO specific section
 
-## TrueNAS specific modifications
+## zVaultIO specific modifications
 # PF for HA
 device		pf
 device		pflog
@@ -470,5 +452,4 @@ device		ntb_hw_intel	# Intel NTB hardware driver
 device		ntb_hw_plx	# PLX NTB hardware driver
 #device		ixnvdimm	# NVDIMM driver with sync over NTB
 device		ioat		# Intel I/OAT DMA engine
-
-## End TrueNAS specific section
+## End zVaultIO specific section

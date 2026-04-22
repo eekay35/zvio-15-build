@@ -28,7 +28,7 @@ repos += {
     "name": "zvio-os",
     "path": "zvio-os",
     "url": "https://github.com/eekay35/zvio-15-os.git",
-    "branch": "main"
+    "branch": "releng/15.0"
 }
 
 repos += {
