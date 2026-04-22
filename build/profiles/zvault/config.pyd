@@ -29,8 +29,8 @@ include("ports.pyd")
 include("packages.pyd")
 
 profile = {
-    "name": "zvault13",
-    "description": "zVault 13",
+    "name": "zvault15",
+    "description": "zVault 15",
     "owner": "info@zvault.io",
     "status": "active"
 }
