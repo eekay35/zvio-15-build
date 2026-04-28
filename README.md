@@ -3,7 +3,6 @@
  <a href="https://www.truenas.com/community/"><img alt="Join Forums" src="https://badgen.net/badge/Forums/Post%20Now//purple" /></a> 
  <a href="https://jira.ixsystems.com"><img alt="File Issue" src="https://badgen.net/badge/Jira/File%20Issue//red?icon=jira" /></a>
 </p>
-
 Forked from https://github.com/zvaultio
 
 # Building zVaultIO 15 CORE/Enterprise from Scratch
@@ -102,3 +101,13 @@ ISO files: ```zvault/_BE/release/zVault-15-MASTER-{date}/x64/```.
 Update files: ```zvault/_BE/release/```.
 
 Log files: ```zvault/_BE/objs/logs/```.
+
+## Current issues
+
+* Need to get these in place:
+  ```
+  mkdir -p zvault/_BE/zvio-ports/distfiles/3dm2
+  fetch https://github.com/eekay35/zvaultio-13.3-build/raw/refs/heads/main/files/arcconf_B28200.zip -o zvault/_BE/zvio-ports/distfiles/arcconf_B28200.zip
+  fetch https://github.com/eekay35/zvaultio-13.3-build/raw/refs/heads/main/files/CLI_freebsd-from_the_10-2-2-1_9-5-5-1_codesets.zip -o zvault/_BE/zvio-ports/distfiles/3dm2/CLI_freebsd-from_the_10-2-2-1_9-5-5-1_codesets.zip
+  ```
+* Errors at the moment:
