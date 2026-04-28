@@ -25,11 +25,11 @@ Note: All these commands must be run as `root`.
 
 
 ## Basics (Please note this is still VERY much BETA)
-git clone https://github.com/eekay35/zvio-15-build.git /usr/build
-cd /usr/build
-make bootstrap-pkgs
-make checkout zvault
-make release PROFILE=zvault PRODUCT=zVault Train=zVault-15
+* git clone https://github.com/eekay35/zvio-15-build.git /usr/build
+* cd /usr/build
+* make bootstrap-pkgs
+* make checkout zvault
+* make release PROFILE=zvault PRODUCT=zVault Train=zVault-15
 
 
 ## Make Targets
