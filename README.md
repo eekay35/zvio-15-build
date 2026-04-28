@@ -24,17 +24,6 @@ Note: All these commands must be run as `root`.
   * The build environment must be FreeBSD 15.x (or 15-STABLE)
 
 
-## Basics (Please note this is still VERY much BETA)
-* To start the default build
-    ```
-    git clone https://github.com/eekay35/zvio-15-build.git /usr/build
-    cd /usr/build
-    make bootstrap-pkgs
-    make checkout zvault
-    make release PROFILE=zvault PRODUCT=zVault Train=zVault-15
-    ```
-
-
 ## Make Targets
 
 * ```checkout``` creates a local working copy of the git repositories with
@@ -69,13 +58,17 @@ Note: All these commands must be run as `root`.
     make bootstrap-pkgs
     ```
 
-
 * First-time checkout of source:
 
     ```
     make checkout zvault
     ```
 
+* To build zVaultIO 15.0
+
+    ```
+    make release PROFILE=zvault PRODUCT=zVault Train=zVault-15
+    ```
 
 A zVaultIO release is built by first updating the source, then building:
 
