@@ -4,9 +4,9 @@
  <a href="https://jira.ixsystems.com"><img alt="File Issue" src="https://badgen.net/badge/Jira/File%20Issue//red?icon=jira" /></a>
 </p>
 
-Forked from https://github.com/truenas/core-build
+Forked from https://github.com/zvailtio
 
-# Building TrueNAS 13 CORE/Enterprise from Scratch
+# Building zVaultIO 15 CORE/Enterprise from Scratch
 
 Note: All these commands must be run as `root`.
 
@@ -21,7 +21,15 @@ Note: All these commands must be run as `root`.
 
 * Operating System
 
-  * The build environment must be FreeBSD 13.x (or 13-STABLE)
+  * The build environment must be FreeBSD 15.x (or 15-STABLE)
+
+
+## Basics (Please note this is still VERY much BETA)
+git clone https://github.com/eekay35/zvio-15-build.git /usr/build
+cd /usr/build
+make bootstrap-pkgs
+make checkout zvault
+make release PROFILE=zvault PRODUCT=zVault Train=zVault-15
 
 
 ## Make Targets
@@ -32,7 +40,7 @@ Note: All these commands must be run as `root`.
 * ```update``` does a ```git pull``` to update the local working copy with
   any changes made to the git repositories since the last update
 
-* ```release``` actually builds the FreeNAS release
+* ```release``` actually builds the zVaultIO release
 
 * ```clean``` removes previously built files
 
@@ -41,14 +49,14 @@ Note: All these commands must be run as `root`.
 
 * Install git
     ```
-    pkg install -y git
+    pkg install -y git (or git-tiny)
     rehash
     ```
 
 * Clone the build repository (```/usr/build``` is used for this example):
 
     ```
-    git clone https://github.com/truenas/build /usr/build
+    git clone https://github.com/eekay35/zvio-15-build.git /usr/build
     ```
 
 * Install Dependencies
@@ -56,19 +64,17 @@ Note: All these commands must be run as `root`.
     ```
     cd /usr/build
     make bootstrap-pkgs
-    python3 -m ensurepip
-    pip3 install six
     ```
 
 
 * First-time checkout of source:
 
     ```
-    make checkout
+    make checkout zvault
     ```
 
 
-A FreeNAS release is built by first updating the source, then building:
+A zVaultIO release is built by first updating the source, then building:
 
 ```
 make update
@@ -92,11 +98,11 @@ Use ```make clean``` to remove all built files.
 
 ## Results
 
-Built files are in the ```freenas/_BE``` subdirectory,
-```/usr/build/freenas/_BE``` in this example.
+Built files are in the ```zvault/_BE``` subdirectory,
+```/usr/build/zvault/_BE``` in this example.
 
-ISO files: ```freenas/_BE/release/TrueNAS-13-MASTER-{date}/x64/```.
+ISO files: ```zvault/_BE/release/zVault-15-MASTER-{date}/x64/```.
 
-Update files: ```freenas/_BE/release/```.
+Update files: ```zvault/_BE/release/```.
 
-Log files: ```freenas/_BE/objs/logs/```.
+Log files: ```zvault/_BE/objs/logs/```.
