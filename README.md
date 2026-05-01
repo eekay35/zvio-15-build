@@ -101,10 +101,10 @@ Log files: ```zvault/_BE/objs/logs/```.
 
 ## Current issues
 
-* Need to get these in place:
+* Need to get these in place for a successful port build as there are unfetchable:
+    (Current sysutils/arcconf and sysutils/tw_cli ports)
   ```
   mkdir -p zvault/_BE/zvio-ports/distfiles/3dm2
-  fetch https://github.com/eekay35/zvaultio-13.3-build/raw/refs/heads/main/files/arcconf_B28200.zip -o zvault/_BE/zvio-ports/distfiles/arcconf_B28200.zip
-  fetch https://github.com/eekay35/zvaultio-13.3-build/raw/refs/heads/main/files/CLI_freebsd-from_the_10-2-2-1_9-5-5-1_codesets.zip -o zvault/_BE/zvio-ports/distfiles/3dm2/CLI_freebsd-from_the_10-2-2-1_9-5-5-1_codesets.zip
+  cp -a zvault/_BE/zvio-ports/distfiles/* zvault/_BE/objs/ports/distfiles/
   ```
 * Errors at the moment:
