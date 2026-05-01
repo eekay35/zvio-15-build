@@ -101,7 +101,8 @@ Log files: ```zvault/_BE/objs/logs/```.
 
 ## Current issues
 
-* Need to get these in place for a successful port build as there are unfetchable:
+* Need to get these in place for a successful port build as they are 
+  un-fetchable without manual intervention:
     (Current sysutils/arcconf and sysutils/tw_cli ports)
   ```
   mkdir -p zvault/_BE/zvio-ports/distfiles/3dm2
