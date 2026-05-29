@@ -17,7 +17,7 @@ Note: All these commands must be run as `root`.
 
 * Operating System
 
-  * The build environment must be FreeBSD 15.x (or 15-STABLE)
+  * The build environment must be FreeBSD 15.x (or 15-STABLE) or higher
 
 
 ## Make Targets
