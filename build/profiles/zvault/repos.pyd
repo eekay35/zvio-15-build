@@ -50,7 +50,7 @@ repos += {
     "name": "zvio-ports",
     "path": "zvio-ports",
     "url": "https://github.com/eekay35/zvio-15-ports.git",
-    "branch": "2026Q2"
+    "branch": "main"
 }
 
 repos += {
